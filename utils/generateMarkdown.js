@@ -1,55 +1,18 @@
-/* // TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {}
-
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
-
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  return `# ${data.title}
-
-`;
-} */
-
-/* 
-function renderLicenseBadge(license) {
-  if (!license) {
-    return "";
-  }
-  const badgeUrl = `https://img.shields.io/badge/license-${license}-blue`;
-  return `![License](${badgeUrl})`;
-}
-
-function renderLicenseLink(license) {
-  if (!license) {
-    return "";
-  }
-  const link = `https://choosealicense.com/licenses/${license}`;
-  return `[${license}](${link})`;
-}
-
-function renderLicenseSection(license) {
-  if (!license) {
-    return "";
-  }
-  const badge = renderLicenseBadge(license);
-  const link = renderLicenseLink(license);
-  return `## License
-
-${badge}
-
-This project is licensed under the ${link} license.`;
-} */
-
 const gravatar = require('gravatar');
+const size = 200;
 
-const readMe_size = 200;
+function getBadgeLink({ license }) {
+  switch (license) {
+    case 'MIT':
+      return '[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)';
+    case 'GPL':
+        return '[![License](https://img.shields.io/badge/License-GPLv3-green.svg)](https://www.gnu.org/licenses/gpl.html)';
+    case 'Apache':
+        return '[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)';
+      default:
+      return '';
+  }
+}
 
 function getLicenseLink({ license }) {
   switch (license) {
@@ -73,7 +36,7 @@ function getLicenseLink({ license }) {
   }
 }
 
-function generateVideo({ youtube_id, name }) {
+function generateVideo({ youtube_id, name = 'My Project' }) {
   if (youtube_id) {
     return `
 ### Video - ${name}
@@ -86,24 +49,40 @@ function generateVideo({ youtube_id, name }) {
 
 function generateMarkdown(data) {
   const video = generateVideo({ youtube_id: data.video, name: data.title });
-  const profilePhotoUrl = gravatar.url(data.email, { protocol: 'https', s: readMe_size });
+  const profilePhotoUrl = gravatar.url(data.email, { s: size, r: 'pg', d: '404' });
   const licenseLink = getLicenseLink(data);
-
+  const badgeLink = getBadgeLink({ license: data.license });
   return `
 # ${data.name}
 ### *${data.heading}*
+## ⚖️ License
+${badgeLink}
+**${data.name}** is generously distributed under the *[${data.license}]
+(${data.license.toLowerCase()})*.(${licenseLink})*.
+## 📝 Table of Contents
+- <a href="#description">Description</a>
+- <a href="#requirements">Requirements</a>
+- <a href="#usage">Usage</a>
+- <a href="#author">Who made it?</a>
+- <a href="#license">License</a>
 ## 📄 Description
+<a id="description"></a>
 ${data.description}
 ## ⚙️ Requirements
-${data.requirements}
+<a id="requirements"></a>
+${data.installation}
 ## 💻 Usage
+<a id="usage"></a>
 ${data.usage}
 ${video}
 ## 👨‍💻 Who made it?
-[![${data.author}](${profilePhotoUrl})](${data.website} "${data.author} personal website")
-**[${data.author}](${data.website})**, a highly passionate, focused; pragmatic software engineer 🧙‍♂️
-## ⚖️ License
-**${data.name}** is generously distributed under the *[${data.license}](${licenseLink})*.
+<a id="author"></a>
+[[${data.username}](${profilePhotoUrl})](${data.website} "${data.author} personal website")
+**[${data.author}](${data.website})**, is a highly passionate, focused; pragmatic software engineer 🧙‍♂️
+More details about the license can be found [here](${licenseLink}).
+## ❓Questions
+<a id="license"></a>
+If you have any questions, you can reach me at: ${data.contact}
 `;
 }
 

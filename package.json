@@ -1,14 +1,16 @@
 {
   "name": "static-site",
   "version": "1.0.0",
-  "description": "A simple static site generator",
+  "description": "Generate a readme file for new project",
   "main": "index.js",
   "scripts": {
-    "init": "node index.js"
+    "init": "node index.js",
+    "install": "npm install"
   },
   "author": "John Schoppmann",
   "dependencies": {
     "fs": "0.0.1-security",
+    "gravatar": "^1.8.2",
     "inquirer": "^8.2.4"
   }
 }
