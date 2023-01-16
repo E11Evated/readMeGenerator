@@ -28,7 +28,7 @@ Copy Link: Hit the "Code" button within this GitHub repo to copy link. Clone: Wi
 Once software is downloaded and Node packages are initialized, it's time to get started! Within the directory for this project, initialize prompts using the command "node index.js". From there, simply enter the necessary information for your project, and voila! A new README file will be generated. Not sure what to input for a certain section? Follow the prompts in the terminal.
 
 ### Video -
-[![Youtube Video, how to use Read me Generator](https://img.youtube.com/vi/SKIP/0.jpg)](https://www.youtube.com/watch?v=SKIP)
+[![Youtube Video, how to use Read me Generator](https://img.youtube.com/vi/SKIP/0.jpg)](https://youtu.be/SR_Wy67nnhs)
 
 
 
